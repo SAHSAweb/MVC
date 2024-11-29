@@ -5,7 +5,7 @@ using MVC.ViewModels;
 
 namespace MVC.Managers
 {
-    public class MarketDB : DbContext
+    public class MarketDB : DbContext, IMarketDB
     {
         public DbSet<Beverages> Beverages { get; set; } = null!;
         public DbSet<Fish> Fish { get; set; } = null!;
@@ -17,5 +17,10 @@ namespace MVC.Managers
         {
             Database.EnsureCreated();
         }
+        Task<int> IMarketDB.SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
     }
 }

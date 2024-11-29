@@ -8,8 +8,8 @@ namespace MVC.Managers
 {
     public class Repository: IRepository
     {
-        MarketDB Mdb { get; set; }
-        public Repository(MarketDB mdb)
+       IMarketDB Mdb { get; set; }
+        public Repository(IMarketDB mdb)
         {
             Mdb = mdb;
         }
