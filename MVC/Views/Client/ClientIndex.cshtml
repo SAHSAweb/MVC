@@ -1,0 +1,50 @@
+﻿@using MVC.Interfaces;
+@using MVC.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model IEnumerable<IProducts>
+
+
+@foreach (var item in Model)
+{
+    <h2>@item.CategoriesName</h2>
+    break;
+}
+<table class="table hidden-empty-cells">
+    <tr><th>Name Product</th><th>Quantity</th><th>Price</th></tr>
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Name != null)
+                {
+                    <td>@item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <form method="get" action="/Client/BuyOrder">
+
+                    <td>
+                        <input type="number" name="Count" placeholder="Count" />
+                        <input type="hidden" name="Name" value="@item.Name" />
+                        <input type="hidden" name="price" value="@item.Price" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="hidden" name="categoriesid" value="@item.CategoriesId" />
+                    </td>
+                    <td>
+                        <p>
+                            <input type="submit" value="BUY" autofocus />
+                        </p>
+                    </td>
+                    </form>
+                }
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Product out of stock</td>
+        </tr>
+    }
+</table>

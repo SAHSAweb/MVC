@@ -1,0 +1,64 @@
+﻿@using MVC.Interfaces;
+@using MVC.Models;
+@model IEnumerable<IProducts>
+
+
+@foreach (var item in Model)
+{
+    <h2>@item.CategoriesName</h2>
+    break;
+}
+<table class="table hidden-empty-cells">
+    <tr><th>Name Product</th><th>Quantity</th><th>Price</th></tr>
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Name != null)
+                {
+                    <td>@item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a href="/categories/edit/@item.Id?categoriesId=@item.CategoriesId">
+                            <input type="submit" value="EDIT" />
+                        </a>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="/categories/delete/@item.Id?categoriesId=@item.CategoriesId">
+                                <input type="submit" value="DELETE" autofocus />
+                            </a>
+                        </p>
+                    </td>
+                }
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Product out of stock</td>
+        </tr>
+    }
+</table>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        <p>
+            <a href="/categories/add/@item.CategoriesId">
+                <input type="submit" value="ADD" autofocus />
+            </a>
+        </p>
+        break;
+    }
+}
+<p>
+    <a href="/Admin/Adminindex">
+        <input type="submit" value="BACK" autofocus />
+    </a>
+</p>
+

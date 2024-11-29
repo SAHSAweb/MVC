@@ -1,0 +1,35 @@
+﻿
+@using MVC.Models;
+@using MVC.ViewModels;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model ProductViewModel
+
+<html lang="en">
+<body style="background-repeat:round">
+    <p><h1>@Model.CategoriesName</h1></p>
+    <h2>EDIT</h2>
+    <form method="post" action="/categories/edit">
+
+        <input type="hidden" name="CategoriesId" value="@Model.CategoriesId" />
+
+         <input type="hidden" name="Id" value="@Model.Id" />
+
+       <label>Name</label><br />
+        <input type="text" asp-for="Name" placeholder="New name" /><br />
+
+        <label>Quantity</label><br />
+        <input type="number" asp-for="Quantity" placeholder="New quantity" /><br />
+
+        <label>Price</label><br />
+        <input required asp-for="Price" type="number" step="0.01" placeholder="Price" /><br />
+
+        <p><input type="submit" value="UPDATE" /></p>
+    </form>  
+    <p>
+        <a href="/Admin/Adminindex">
+            <input type="submit" value="BACK" autofocus />
+        </a>
+    </p>
+</body>
+</html>
