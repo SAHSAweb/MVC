@@ -14,12 +14,12 @@ builder.Services.AddScoped<IProducts, Beverages>();
 builder.Services.AddScoped<IProducts, Fish>();
 builder.Services.AddScoped<IProducts, Meat>();
 builder.Services.AddScoped<IProducts, Vegetables>();
-//builder.Services.AddSession(); // добавляем поддержку сессий
+//builder.Services.AddSession(); // Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГі Г±ГҐГ±Г±ГЁГ©
 var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
-//app.UseSession(); // включаем сессии
+//app.UseSession(); // РІРєР»СЋС‡Р°РµРј СЃРµСЃСЃРёРё
 
 app.MapDefaultControllerRoute();
 app.Run();
