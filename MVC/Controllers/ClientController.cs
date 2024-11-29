@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MVC.Interfaces;
 using MVC.Managers;
 using System.Security.Cryptography;
 
@@ -7,9 +8,9 @@ namespace MVC.Controllers
 {
     public class ClientController : Controller
     {
-        Repository Rep { get; set; }
+        IRepository Rep { get; set; }
        
-        public ClientController(Repository rp )
+        public ClientController(IRepository rp )
         {
             Rep = rp;      
         }
@@ -23,9 +24,6 @@ namespace MVC.Controllers
             await Rep.ChangeQuantity(categoriesid, id, count);          
             return RedirectToAction("ClientIndex", new { id = categoriesid });            
         }
-        //public async Task<IActionResult> ShoppingCart()
-        //{
-        //    return View(await Rep.GetAsync());
-        //}
+
     }
 }

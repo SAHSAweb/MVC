@@ -9,7 +9,7 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddDbContext<MarketDB>(options => options.UseSqlServer(connection));
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<Repository>();
+builder.Services.AddScoped<IRepository,Repository>();
 builder.Services.AddScoped<IProducts, Beverages>();
 builder.Services.AddScoped<IProducts, Fish>();
 builder.Services.AddScoped<IProducts, Meat>();

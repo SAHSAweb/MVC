@@ -6,7 +6,7 @@ using MVC.ViewModels;
 
 namespace MVC.Managers
 {
-    public class Repository
+    public class Repository: IRepository
     {
         MarketDB Mdb { get; set; }
         public Repository(MarketDB mdb)

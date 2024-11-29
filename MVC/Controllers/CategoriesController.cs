@@ -13,8 +13,8 @@ namespace MVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        Repository Rep { get; set; }
-        public CategoriesController(Repository rp)
+        IRepository Rep { get; set; }
+        public CategoriesController(IRepository rp)
         {
             Rep = rp;
         }
