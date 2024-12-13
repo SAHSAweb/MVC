@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MVC.DAL.Entities;
 using MVC.Interfaces;
 using MVC.Managers;
+using MVC.Model.Enams;
 using System.Security.Cryptography;
 
 namespace MVC.Controllers
@@ -14,9 +16,9 @@ namespace MVC.Controllers
         {
             Rep = rp;      
         }
-        public async Task<IActionResult> ClientIndex(int Id)
+        public async Task<IActionResult> ClientIndex(Products type)
         {
-            return View(await Rep.GetAsync(Id));
+            return View(await Rep.GetAsync(type));
         }
         public async Task<IActionResult> BuyOrder(string Name, int id, int count, double price, int categoriesid)
         {

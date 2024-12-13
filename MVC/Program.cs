@@ -11,10 +11,6 @@ builder.Services.AddDbContext<MarketDB>(options => options.UseSqlServer(connecti
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRepository,Repository>();
 builder.Services.AddScoped<IMarketDB,MarketDB>();
-builder.Services.AddScoped<IProducts, Beverages>();
-builder.Services.AddScoped<IProducts, Fish>();
-builder.Services.AddScoped<IProducts, Meat>();
-builder.Services.AddScoped<IProducts, Vegetables>();
 //builder.Services.AddSession(); // äîáàâëÿåì ïîääåðæêó ñåññèé
 var app = builder.Build();
 
