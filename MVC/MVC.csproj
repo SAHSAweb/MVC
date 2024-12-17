@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MVC.DAL\MVC.DAL.csproj" />
+    <ProjectReference Include="..\ClassLibrary1\MVC.Model.csproj" />
+    <ProjectReference Include="..\MVC.BL\MVC.BL.csproj" />
   </ItemGroup>
 
 </Project>

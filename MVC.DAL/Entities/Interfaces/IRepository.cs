@@ -1,4 +1,4 @@
-﻿namespace MVC.DAL
+﻿namespace MVC.DAL.Entities.Interfaces
 {
 
     public interface IRepository<T> where T : class
@@ -7,6 +7,7 @@
         IEnumerable<T> GetAll();
         void Add(T user);
         void Delete(Guid id);
+        void Update(Product product);
     }
 
 }

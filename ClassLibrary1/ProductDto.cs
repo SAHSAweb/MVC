@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MVC.Model
 {
-    internal class ProductDto
+    public class ProductDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVC.DAL
 {
-    internal class MarketDbContext :DbContext
+    public class MarketDbContext :DbContext
     {
         private readonly DbContextOptions<MarketDbContext> options;
 
