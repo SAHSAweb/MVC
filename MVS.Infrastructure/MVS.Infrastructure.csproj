@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\MVC.Model.csproj" />
+    <ProjectReference Include="..\MVC.BL\MVC.BL.csproj" />
+    <ProjectReference Include="..\MVC.DAL\MVC.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

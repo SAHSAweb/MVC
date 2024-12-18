@@ -31,6 +31,12 @@ namespace MVC.BL.Services
             _productRepository.Add(product);
         }
 
+        public void Update(ProductDto data)
+        {
+            var product = _mapper.Map<Product>(data);
+            _productRepository.Update(product);
+        }
+
         public void Delete(Guid id)
         {
             _productRepository.Delete(id);
@@ -42,10 +48,5 @@ namespace MVC.BL.Services
             return _mapper.Map<ProductDto>(product);
         }
 
-        public void Update(ProductDto data)
-        {
-            var product = _mapper.Map<Product>(data);
-            _productRepository.Update(product);
-        }
     }
 }

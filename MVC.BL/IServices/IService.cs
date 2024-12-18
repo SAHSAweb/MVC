@@ -2,9 +2,7 @@
 using MVC.Model;
 
 namespace MVC.BL.IServices
-{
-    public interface IService<T>
-    {
+{ 
         public interface IService<T> where T : class
         {
             T GetById(Guid id);
@@ -12,6 +10,5 @@ namespace MVC.BL.IServices
             void Add(T data);
             void Delete(Guid id);
             void Update(ProductDto product);
-        }
-    }
+        }    
 }

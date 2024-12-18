@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.Model", "ClassLibrary1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.DAL", "MVC.DAL\MVC.DAL.csproj", "{D668EBF8-BE19-4F48-B4D5-8D8CDE039081}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.BL", "MVC.BL\MVC.BL.csproj", "{70F42351-E5CE-4441-909E-DA597FC5EC90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.BL", "MVC.BL\MVC.BL.csproj", "{70F42351-E5CE-4441-909E-DA597FC5EC90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVS.Infrastructure", "MVS.Infrastructure\MVS.Infrastructure.csproj", "{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{70F42351-E5CE-4441-909E-DA597FC5EC90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70F42351-E5CE-4441-909E-DA597FC5EC90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70F42351-E5CE-4441-909E-DA597FC5EC90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

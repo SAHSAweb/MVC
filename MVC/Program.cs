@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using MVC.Managers;
 using MVC.Models;
 using MVC.Interfaces;
 
@@ -9,8 +8,6 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddDbContext<MarketDB>(options => options.UseSqlServer(connection));
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IRepository,Repository>();
-builder.Services.AddScoped<IMarketDB,MarketDB>();
 //builder.Services.AddSession(); // äîáàâëÿåì ïîääåðæêó ñåññèé
 var app = builder.Build();
 

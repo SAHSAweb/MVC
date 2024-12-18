@@ -18,31 +18,15 @@ namespace MVC.DAL
             _dbContext = context;
         }
 
-        public void Add(Product product)
-        {
-            _dbContext.Products.Add(product);
-            _dbContext.SaveChanges();
-        }
-
-        public void Delete(Guid id)
-        {
-            var product = _dbContext.Products.FirstOrDefault(p => p.Id == id);
-
-            if (product != null)
-            {
-                _dbContext.Products.Remove(product);
-                _dbContext.SaveChanges();
-            }
-        }
-
         public IEnumerable<Product> GetAll()
         {
             return _dbContext.Products;
         }
 
-        public Product GetById(Guid id)
+        public void Add(Product product)
         {
-            return _dbContext.Products.FirstOrDefault(p => p.Id == id);
+            _dbContext.Products.Add(product);
+            _dbContext.SaveChanges();
         }
 
         public void Update(Product product)
@@ -62,6 +46,22 @@ namespace MVC.DAL
                 throw new KeyNotFoundException($"Product with ID {product.Id} was not found.");
             }
         }
+        public void Delete(Guid id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product != null)
+            {
+                _dbContext.Products.Remove(product);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public Product GetById(Guid id)
+        {
+            return _dbContext.Products.FirstOrDefault(p => p.Id == id);
+        }
+
     }
 
 
