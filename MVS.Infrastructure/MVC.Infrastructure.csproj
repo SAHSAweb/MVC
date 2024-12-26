@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\MVC.Model.csproj" />
+    <ProjectReference Include="..\MVC.BL\MVC.BL.csproj" />
+    <ProjectReference Include="..\MVC.DAL\MVC.DAL.csproj" />
   </ItemGroup>
 
 </Project>

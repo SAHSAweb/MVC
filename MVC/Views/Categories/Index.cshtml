@@ -1,11 +1,9 @@
-﻿@using MVC.Interfaces;
-@using MVC.Models;
-@model IEnumerable<IProducts>
-
+﻿@using MVC.ViewModels;
+@model IEnumerable<ProductViewModel>;
 
 @foreach (var item in Model)
 {
-    <h2>@item.CategoriesName</h2>
+    <h2>@item.Category</h2>
     break;
 }
 <table class="table hidden-empty-cells">
@@ -21,13 +19,13 @@
                     <td>@item.Quantity</td>
                     <td>@item.Price</td>
                     <td>
-                        <a href="/categories/edit/@item.Id?categoriesId=@item.CategoriesId">
+                        <a href="/categories/edit/@item.Id?_category=@item.Category">
                             <input type="submit" value="EDIT" />
                         </a>
                     </td>
                     <td>
                         <p>
-                            <a href="/categories/delete/@item.Id?categoriesId=@item.CategoriesId">
+                            <a href="/categories/delete/@item.Id?_category=@item.Category">
                                 <input type="submit" value="DELETE" autofocus />
                             </a>
                         </p>
@@ -44,18 +42,12 @@
     }
 </table>
 
-@if (Model != null && Model.Any())
-{
-    @foreach (var item in Model)
-    {
-        <p>
-            <a href="/categories/add/@item.CategoriesId">
-                <input type="submit" value="ADD" autofocus />
-            </a>
-        </p>
-        break;
-    }
-}
+<p>
+    <a href="/categories/add/">
+        <input type="submit" value="ADD" autofocus />
+    </a>
+</p>
+
 <p>
     <a href="/Admin/Adminindex">
         <input type="submit" value="BACK" autofocus />

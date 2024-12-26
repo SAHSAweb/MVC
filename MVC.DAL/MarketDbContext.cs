@@ -10,13 +10,14 @@ namespace MVC.DAL
 {
     public class MarketDbContext :DbContext
     {
-        private readonly DbContextOptions<MarketDbContext> options;
+        private readonly DbContextOptions<MarketDbContext>? options;
+        public DbSet<Product> Products { get; set; } = null!;
 
         public MarketDbContext(DbContextOptions<MarketDbContext> options)
+            : base(options)
         {
-            this.options = options;
+            Database.EnsureCreated();
         }
-        public DbSet<Product> Products { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

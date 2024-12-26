@@ -7,19 +7,19 @@ using MVC.DAL.Entities;
 using MVC.DAL.Entities.Interfaces;
 using MVC.Model;
 
-namespace MVS.Infrastructure
+namespace MVC.Infrastructure
 {
     public static class InfrastructureExtensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connection)
         {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connection))
             {
-                throw new ArgumentNullException(nameof(connectionString));
+                throw new ArgumentNullException(nameof(connection));
             }
 
             services.AddDbContext<MarketDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer(connection));
           
             services.AddScoped<IRepository<Product>, ProductRepository>();
           

@@ -1,5 +1,4 @@
-﻿@using MVC.Interfaces;
-@using MVC.Models;
+﻿
 @using MVC.ViewModels;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -9,20 +8,19 @@
 
 <html>
 <body style="background-color:thistle">
-    <p><h1>@Model.CategoriesName</h1></p>
-
+   
     <h2>Add Product</h2>
 
     <!-- Если это напитки -->
 
-
     <form method="post" action="/categories/add">
-        <!-- Скрытое поле для типа продукта -->
-        <input type="hidden" name="CategoriesId" value="@Model.CategoriesId" />
+
+        <label>Category</label><br />
+        <input required type="text" name="Category" placeholder="Category" autofocus /><br />
 
         <!-- Поле для названия напитка -->
         <label>Name</label><br />
-        <input type="text" name="Name" placeholder="Name" required autofocus /><br />
+        <input type="text" name="Name" placeholder="Name" required  /><br />
 
         <!-- Поле для описания напитка -->
         <label>Quantity</label><br />

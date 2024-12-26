@@ -24,8 +24,25 @@ namespace MVC.ServicesUI
 
         public void Add(ProductViewModel data)
         {
-            _productService.Add(_mapper.Map<ProductDto>(data));
+            var product = _mapper.Map<ProductDto>(data);
+            _productService.Add(product);
         }
+        //public void Add(ProductViewModel data)
+        //{
+        //    // Создаем экземпляр ProductDto
+        //    var product = new ProductDto
+        //    {
+        //        Id = data.Id,                     // Если у вас есть Id в ViewModel
+        //        Name = data.Name,                 // Прямое сопоставление свойств
+        //        Price = data.Price,               // Если типы совпадают
+        //        Quantity = data.Quantity,   // Дополнительные свойства
+        //        Category = data.Category      // Или любые другие свойства
+        //    };
+
+        //    // Передаем объект в сервис
+        //    _productService.Add(product);
+        //}
+
 
         public void Update(ProductViewModel data)
         {

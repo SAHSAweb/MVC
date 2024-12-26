@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MVC.Managers;
 
 using MVC.Interfaces;
 using System.Numerics;
@@ -8,61 +7,73 @@ using MVC.ViewModels;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Authorization;
+using MVC.Model;
+using MVC.Model.Enams;
 
 namespace MVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        IRepository Rep { get; set; }
-        public CategoriesController(IRepository rp)
+        private readonly IUiService<ProductViewModel> _productService;
+
+        public CategoriesController(IUiService<ProductViewModel> productService)
         {
-            Rep = rp;
-        }
-        
-        public async Task<IActionResult> Index(int Id)
-        {
-            //// Проверка авторизации
-            //if (HttpContext.Session.GetString("IsAuthorized") != "true")
-            //{
-            //    //return RedirectToAction("FormAuthorization", "Autorization");
-            //return View(await Rep.GetAsync(Id));          
-            //}
-            //else return View("Client");
-            return View(await Rep.GetAsync(Id));
+            _productService = productService;
         }
 
-        public IActionResult Add(int id)
+        [HttpGet]
+        public IActionResult Index(Products category)
         {
-            return View(Rep.AddProduct(id));
+            var result = _productService.GetAll().Where(p => p.Category == category).ToList();
+            return View(result);
+        }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View(new ProductViewModel());
         }
         [HttpPost]
-        public async Task<IActionResult> Add(ProductViewModel model)
+        public IActionResult Add(ProductViewModel model)
         {
-            model.Name = model.Name;
-            model.Quantity = model.Quantity;
-            model.Price = model.Price;
-            await Rep.AddCategoryAsync(model);
-                return RedirectToAction("Index", new { id = model.CategoriesId });         
+            //model.Name = model.Name;
+            //model.Quantity = model.Quantity;
+            //model.Price = model.Price;
+             _productService.Add(model);
+
+            return RedirectToAction("Index", new { category = model.Category });
         }
-        public async Task<IActionResult> Delete(int id, int categoriesId)
-        {
-            if (categoriesId == 1 || categoriesId == 2 || categoriesId == 3 || categoriesId == 4)
-            {
-                await Rep.DeleteCategoryAsync(id, categoriesId);
-                return RedirectToAction("Index", new { id = categoriesId });
-            }
-            else return BadRequest("Неправильний категорійний ідентифікатор.");            
+        public IActionResult Delete(Guid Id, Products _category)
+        {           
+                 _productService.Delete( Id);
+                return RedirectToAction("Index", new { category = _category });
+            
+          //  else return BadRequest("Неправильний категорійний ідентифікатор.");
         }
-       
-        public IActionResult Edit(int id, int categoriesId)
-        {
-            return View(Rep.CreateModel(id, categoriesId));
-        }
-        [HttpPost]
-        public async Task< IActionResult> Edit(ProductViewModel model)
-        {          
-            await Rep.UpdateProductAsync(model);
-            return RedirectToAction("Index", new { id = model.CategoriesId});           
-        }
+
+
+
+        //        public async Task<IActionResult> Index(int Id)
+        //        {
+        //            //// Проверка авторизации
+        //            //if (HttpContext.Session.GetString("IsAuthorized") != "true")
+        //            //{
+        //            //    //return RedirectToAction("FormAuthorization", "Autorization");
+        //            //return View(await Rep.GetAsync(Id));          
+        //            //}
+        //            //else return View("Client");
+        //            return View(await Rep.GetAsync(Id));
+        //        }
+
+
+        //        public IActionResult Edit(int id, int categoriesId)
+        //        {
+        //            return View(Rep.CreateModel(id, categoriesId));
+        //        }
+        //        [HttpPost]
+        //        public async Task< IActionResult> Edit(ProductViewModel model)
+        //        {          
+        //            await Rep.UpdateProductAsync(model);
+        //            return RedirectToAction("Index", new { id = model.CategoriesId});           
+        //       }
     }
-}
+}   

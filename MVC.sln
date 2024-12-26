@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.DAL", "MVC.DAL\MVC.DAL.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.BL", "MVC.BL\MVC.BL.csproj", "{70F42351-E5CE-4441-909E-DA597FC5EC90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVS.Infrastructure", "MVS.Infrastructure\MVS.Infrastructure.csproj", "{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Infrastructure", "MVS.Infrastructure\MVC.Infrastructure.csproj", "{E45DEDE0-AFBA-456C-BCA8-2721C8ACA2EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
