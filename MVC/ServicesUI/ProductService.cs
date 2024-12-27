@@ -2,6 +2,7 @@
 using MVC.BL.IServices;
 using MVC.Interfaces;
 using MVC.Model;
+using MVC.Model.Enams;
 using MVC.ViewModels;
 
 namespace MVC.ServicesUI
@@ -17,9 +18,9 @@ namespace MVC.ServicesUI
             _mapper = mapper;
         }
 
-        public IEnumerable<ProductViewModel> GetAll()
+        public IEnumerable<ProductViewModel> GetAll(Products category)
         {
-            return _mapper.Map<List<ProductViewModel>>(_productService.GetAll());
+            return _mapper.Map<List<ProductViewModel>>(_productService.GetAll(category));
         }
 
         public void Add(ProductViewModel data)

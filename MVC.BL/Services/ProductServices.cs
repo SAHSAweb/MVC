@@ -5,6 +5,7 @@ using MVC.DAL.Entities;
 using MVC.BL.IServices;
 using MVC.Model;
 using AutoMapper;
+using MVC.Model.Enams;
 
 namespace MVC.BL.Services
 {
@@ -19,9 +20,9 @@ namespace MVC.BL.Services
             _mapper = mapper ;
         }
 
-        public IEnumerable<ProductDto> GetAll()
+        public IEnumerable<ProductDto> GetAll(Products category)
         {
-            var products = _productRepository.GetAll();
+            var products = _productRepository.GetAll(category);
             return _mapper.Map<List<ProductDto>>(products);
         }
 

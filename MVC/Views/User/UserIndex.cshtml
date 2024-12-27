@@ -1,12 +1,13 @@
 ﻿@using MVC.Interfaces;
 @using MVC.Models;
+@using MVC.ViewModels;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<ProductViewModel>;
 
 
-
-@*@foreach (var item in Model)
+@foreach (var item in Model)
 {
-    <h2>@item.CategoriesName</h2>
+    <h2>@item.Category</h2>
     break;
 }
 <table class="table hidden-empty-cells">
@@ -21,18 +22,18 @@
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
                     <td>@item.Price</td>
-                    <form method="get" action="/Client/BuyOrder">
+                    <form method="get" action="/User/BuyOrder">
 
                     <td>
-                        <input type="number" name="Count" placeholder="Count" />
+                        <input type="number" name="Quantity" placeholder="Quantity" />
                         <input type="hidden" name="Name" value="@item.Name" />
                         <input type="hidden" name="price" value="@item.Price" />
                         <input type="hidden" name="id" value="@item.Id" />
-                        <input type="hidden" name="categoriesid" value="@item.CategoriesId" />
+                        <input type="hidden" name="category" value="@item.Category" />
                     </td>
                     <td>
                         <p>
-                            <input type="submit" value="BUY" autofocus />
+                            <input type="submit" value="BUY" />
                         </p>
                     </td>
                     </form>
@@ -46,4 +47,4 @@
             <td colspan="4">Product out of stock</td>
         </tr>
     }
-</table>*@
+</table>

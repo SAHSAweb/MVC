@@ -5,13 +5,13 @@
 
 @model ProductViewModel
 
-<@*html lang="en">
+<html lang="en">
 <body style="background-repeat:round">
-    <p><h1>@Model.CategoriesName</h1></p>
+    <p><h1>@Model.Category</h1></p>
     <h2>EDIT</h2>
     <form method="post" action="/categories/edit">
 
-        <input type="hidden" name="CategoriesId" value="@Model.CategoriesId" />
+        <input type="hidden" name="CategoriesId" value="@Model.Category" />
 
          <input type="hidden" name="Id" value="@Model.Id" />
 
@@ -32,4 +32,4 @@
         </a>
     </p>
 </body>
-</html>*@
+</html>

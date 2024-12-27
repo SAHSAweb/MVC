@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Authorization;
 using MVC.Model;
 using MVC.Model.Enams;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MVC.Controllers
 {
@@ -24,7 +25,7 @@ namespace MVC.Controllers
         [HttpGet]
         public IActionResult Index(Products category)
         {
-            var result = _productService.GetAll().Where(p => p.Category == category).ToList();
+            var result = _productService.GetAll(category).ToList();
             return View(result);
         }
         [HttpGet]
@@ -42,6 +43,7 @@ namespace MVC.Controllers
 
             return RedirectToAction("Index", new { category = model.Category });
         }
+
         public IActionResult Delete(Guid Id, Products _category)
         {           
                  _productService.Delete( Id);
@@ -49,6 +51,20 @@ namespace MVC.Controllers
             
           //  else return BadRequest("Неправильний категорійний ідентифікатор.");
         }
+        [HttpGet]
+        public IActionResult Edit(Guid Id)
+        {
+           var model = _productService.GetById(Id);
+
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel model)
+        {
+             _productService.Update(model);
+            return RedirectToAction("Index", new { category = model.Category });
+        }
+    }
 
 
 
@@ -65,15 +81,4 @@ namespace MVC.Controllers
         //        }
 
 
-        //        public IActionResult Edit(int id, int categoriesId)
-        //        {
-        //            return View(Rep.CreateModel(id, categoriesId));
-        //        }
-        //        [HttpPost]
-        //        public async Task< IActionResult> Edit(ProductViewModel model)
-        //        {          
-        //            await Rep.UpdateProductAsync(model);
-        //            return RedirectToAction("Index", new { id = model.CategoriesId});           
-        //       }
-    }
 }   

@@ -1,5 +1,6 @@
 ﻿using MVC.DAL.Entities;
 using MVC.DAL.Entities.Interfaces;
+using MVC.Model.Enams;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,10 @@ namespace MVC.DAL
             _dbContext = context;
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(Products category)
         {
-            return _dbContext.Products;
+            return _dbContext.Products.Where(p => p.Category == category);
         }
-
         public void Add(Product product)
         {
             _dbContext.Products.Add(product);
