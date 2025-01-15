@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MVC.Infrastructure;
 using MVC.Interfaces;
 using MVC.Model;
+using MVC.Model.Enams;
 using MVC.ServicesUI;
 using MVC.ViewModels;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -13,7 +14,8 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddInfrastructure(connection);
 
-builder.Services.AddScoped<IUiService<ProductViewModel>, ProductService>();
+builder.Services.AddScoped<IProductsServisUI<ProductViewModel, Products>, ProductService>();
+builder.Services.AddScoped<IUsersServiseUI<UserViewModel, UserTypes>, UserService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program));

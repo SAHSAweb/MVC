@@ -14,7 +14,12 @@ namespace MVC.BL
             CreateMap<Product, ProductDto>();
 
             // Если требуется обратный маппинг (из ProductDto в ProductViewModel):
-            CreateMap<ProductDto, Product>();
+            CreateMap<ProductDto, Product>();  
+
+
+            CreateMap<UserDto, User>();  
+            CreateMap<User, UserDto>();
+            
         }
     }
 

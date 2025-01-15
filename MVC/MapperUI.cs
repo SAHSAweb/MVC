@@ -13,7 +13,10 @@ namespace MVC
 
             // Если требуется обратный маппинг (из ProductDto в ProductViewModel):
             CreateMap<ProductDto, ProductViewModel>();
-        }
 
+            CreateMap<UserViewModel, UserDto>();
+            CreateMap<UserDto, UserViewModel>();
+
+        }
     }
 }

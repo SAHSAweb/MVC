@@ -2,10 +2,10 @@
 
 using MVC.DAL.Entities.Interfaces;
 using MVC.DAL.Entities;
-using MVC.BL.IServices;
 using MVC.Model;
 using AutoMapper;
 using MVC.Model.Enams;
+using MVC.BL.Interfaces;
 
 namespace MVC.BL.Services
 {

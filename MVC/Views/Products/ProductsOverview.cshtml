@@ -1,5 +1,9 @@
-﻿@using MVC.ViewModels;
+﻿@using MVC.Interfaces;
+@using MVC.Models;
+@using MVC.ViewModels;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<ProductViewModel>;
+
 
 @foreach (var item in Model)
 {
@@ -18,18 +22,21 @@
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
                     <td>@item.Price</td>
+                    <form method="get" action="/Autorization/FormAuthorization">
+
                     <td>
-                        <a href="/categories/edit/@item.Id">
-                            <input type="submit" value="EDIT" />
-                        </a>
+                        <input type="hidden" name="Quantity" placeholder="Quantity" />
+                        <input type="hidden" name="Name" value="@item.Name" />
+                        <input type="hidden" name="price" value="@item.Price" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="hidden" name="category" value="@item.Category" />
                     </td>
                     <td>
                         <p>
-                            <a href="/categories/delete/@item.Id?_category=@item.Category">
-                                <input type="submit" value="DELETE" autofocus />
-                            </a>
+                            <input type="submit" value="Authorization" />
                         </p>
                     </td>
+                    </form>
                 }
             </tr>
         }
@@ -41,16 +48,3 @@
         </tr>
     }
 </table>
-
-<p>
-    <a href="/categories/add/">
-        <input type="submit" value="ADD" autofocus />
-    </a>
-</p>
-
-<p>
-    <a href="/User/Admin">
-        <input type="submit" value="BACK" autofocus />
-    </a>
-</p>
-

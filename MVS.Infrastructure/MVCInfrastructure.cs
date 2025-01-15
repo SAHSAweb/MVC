@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MVC.BL.IServices;
+using MVC.BL.Interfaces;
 using MVC.BL.Services;
 using MVC.DAL;
 using MVC.DAL.Entities;
@@ -24,6 +24,9 @@ namespace MVC.Infrastructure
             services.AddScoped<IRepository<Product>, ProductRepository>();
           
             services.AddScoped<IService<ProductDto>, ProductService>();
+
+            services.AddScoped<IUserRepository<User>, UserRepository>();
+            services.AddScoped<IUserService<UserDto>, UserService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

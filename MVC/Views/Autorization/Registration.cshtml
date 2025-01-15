@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Registration";
 }
 
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Autorization</title>
+    <title>Registration</title>
 </head>
 <body>
     <h2>Login Form</h2>
@@ -18,13 +18,9 @@
             <label>Password</label><br />
             <input type='password' name='password' required />
         </p>
-
-        <input type='submit' value='Sign in' />
-    </form>
-    <p></p>
-        <a href="/Autorization/Registration">
+      
             <input type='submit' value='Registration' />
-        </a>
+    </form>
     @if (ViewBag.Error != null)
     {
         <p style="color: black;">@ViewBag.Error</p>

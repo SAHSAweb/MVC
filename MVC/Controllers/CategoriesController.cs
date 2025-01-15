@@ -15,9 +15,9 @@ namespace MVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly IUiService<ProductViewModel> _productService;
+        private readonly IProductsServisUI<ProductViewModel, Products> _productService;
 
-        public CategoriesController(IUiService<ProductViewModel> productService)
+        public CategoriesController(IProductsServisUI<ProductViewModel, Products> productService)
         {
             _productService = productService;
         }
@@ -36,10 +36,11 @@ namespace MVC.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel model)
         {
-            //model.Name = model.Name;
-            //model.Quantity = model.Quantity;
-            //model.Price = model.Price;
-             _productService.Add(model);
+            model.Name = model.Name;
+            model.Quantity = model.Quantity;
+            model.Price = model.Price;
+            model.Category = model.Category;
+            _productService.Add(model);
 
             return RedirectToAction("Index", new { category = model.Category });
         }
