@@ -1,0 +1,48 @@
+﻿@using MVC.ViewModels;
+@model IEnumerable<OrderViewModel>;
+
+@{
+    var userId = ViewBag.UserId;
+    string totalPrice = (Model?.Sum(item=> item.Price * item.Amount)?? 0).ToString("F2"); 
+}
+
+<table class="table hidden-empty-cells">
+    <tr><th>OrdersId</th><th>Name</th><th>Amount</th><th>Price</th><th>Edit</th></tr>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ProductName</td>
+                <td>@item.Amount</td>
+                <td>@string.Format("{0:F2}", item.Price * item.Amount)</td>
+                <td>
+                    <a href="/Order/OrderDelete?id=@item.Id&userId=@userId">
+                        <input type='submit' value='Delete' />
+                    </a>
+                </td>
+            </tr>
+        }
+        // Добавляем строку с общей суммой
+        <tr>
+            <td colspan="3" class="text-end font-weight-bold">Total:</td>
+            <td>@totalPrice</td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Orders out of stock</td>
+        </tr>
+    }
+</table>
+
+<div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+    <a href="/User/User?id=@userId">
+        <input type="submit" value="BACK" autofocus style="padding: 10px 20px; border-radius: 7px; cursor: pointer;" />
+    </a>
+    <a href="/order/ordersPayment?userId=@userId&totalPrice=@totalPrice" style="text-decoration: none;">
+        <button style="border-radius: 7px; padding: 10px 20px; cursor: pointer;">Proceed to payment</button>
+    </a>
+</div>

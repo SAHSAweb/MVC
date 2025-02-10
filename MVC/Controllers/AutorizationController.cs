@@ -22,23 +22,24 @@ namespace MVC.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult FormAuthorization(string login, string password)
+        public async Task<IActionResult> FormAuthorizationAsync(string login, string password)
         {
-            var users = _userService.GetAll(UserTypes.User);
+            var users = await _userService.GetAllAsync(UserTypes.User);
+            var user =  users.FirstOrDefault(p => p.Name == login && p.Email == password);
 
             if (login == Admin.login && password == Admin.password)
             {
-                //  HttpContext.Session.SetString("IsAuthorized", "true"); // установка флага авторизации
+
                 return RedirectToAction("Admin", "User");
             }
-            else if (users.Any(p => p.Name == login && p.Email == password))
-            {
-                // Если пользователь найден
-                return RedirectToAction("User", "User");
-            }
 
+            else if (user != null)
+            {
+                return RedirectToAction("User", "User", new { id = user.Id });
+            }
             else
             {
+
                 ViewBag.Error = "Invalid login or password.";
                 return View();
             }
@@ -46,7 +47,7 @@ namespace MVC.Controllers
         [HttpGet]
         public IActionResult Registration() => View();
         [HttpPost]
-        public IActionResult Registration(string login, string password)
+        public async Task<IActionResult> RegistrationAsync(string login, string password)
         {
             var user = new UserViewModel() { Name = login, Email = password, Id = Guid.NewGuid() };
             if (login == Admin.login && password == Admin.password)
@@ -56,7 +57,7 @@ namespace MVC.Controllers
             }
             else
             {
-                var result = _userService.Add(user);
+                var result = await _userService.AddAsync(user);
 
                 if (result)
                 {

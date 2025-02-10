@@ -23,9 +23,9 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(Products category)
+        public async Task<IActionResult> IndexAsync(Products category)
         {
-            var result = _productService.GetAll(category).ToList();
+            var result = await _productService.GetAllAsync(category);
             return View(result);
         }
         [HttpGet]
@@ -34,52 +34,34 @@ namespace MVC.Controllers
             return View(new ProductViewModel());
         }
         [HttpPost]
-        public IActionResult Add(ProductViewModel model)
+        public async Task<IActionResult> AddAsync(ProductViewModel model)
         {
             model.Name = model.Name;
             model.Quantity = model.Quantity;
             model.Price = model.Price;
             model.Category = model.Category;
-            _productService.Add(model);
+           await _productService.AddAsync(model);
 
             return RedirectToAction("Index", new { category = model.Category });
         }
 
-        public IActionResult Delete(Guid Id, Products _category)
+        public async Task<IActionResult> DeleteAsync(Guid Id, Products _category)
         {           
-                 _productService.Delete( Id);
+                await _productService.DeleteAsync( Id);
                 return RedirectToAction("Index", new { category = _category });
-            
-          //  else return BadRequest("Неправильний категорійний ідентифікатор.");
         }
         [HttpGet]
-        public IActionResult Edit(Guid Id)
+        public async Task<IActionResult> EditAsync(Guid Id)
         {
-           var model = _productService.GetById(Id);
+           var model = await _productService.GetByIdAsync(Id);
 
             return View(model);
         }
         [HttpPost]
-        public IActionResult Edit(ProductViewModel model)
+        public async Task<IActionResult> EditAsync(ProductViewModel model)
         {
-             _productService.Update(model);
+             await _productService.UpdateAsync(model);
             return RedirectToAction("Index", new { category = model.Category });
         }
     }
-
-
-
-        //        public async Task<IActionResult> Index(int Id)
-        //        {
-        //            //// Проверка авторизации
-        //            //if (HttpContext.Session.GetString("IsAuthorized") != "true")
-        //            //{
-        //            //    //return RedirectToAction("FormAuthorization", "Autorization");
-        //            //return View(await Rep.GetAsync(Id));          
-        //            //}
-        //            //else return View("Client");
-        //            return View(await Rep.GetAsync(Id));
-        //        }
-
-
 }   

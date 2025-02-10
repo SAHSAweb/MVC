@@ -3,16 +3,28 @@
 @using MVC.ViewModels;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<ProductViewModel>;
-
-
+@{
+    var userId = ViewBag.UserId;
+}
+@section HeaderContent {
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/Order/OrdersCart?userId=@userId">Cart</a>
+    </li>
+}
 @foreach (var item in Model)
 {
     <h2>@item.Category</h2>
     break;
 }
-<button><a href="/user/user"><h3>Home</h3></a></button>
+<button><a href="/user/user?id=@userId"><h3>Home</h3></a></button>
+
 <table class="table hidden-empty-cells">
-    <tr><th>Name Product</th><th>Quantity</th><th>Price</th></tr>
+    <tr>
+        <th>Name Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Amount</th>
+    </tr>
     @if (Model != null && Model.Any())
     {
         @foreach (var item in Model)
@@ -20,24 +32,40 @@
             <tr>
                 @if (item.Name != null)
                 {
-                    <td>@item.Name</td>
-                    <td>@item.Quantity</td>
+                    <td><h3>@item.Name</h3></td>
+                    <td>
+                        @if (item.Quantity >= 50)
+                        {
+                            <h5>Available</h5>
+                        }
+                        else if (item.Quantity <= 0)
+                        {
+                            <h5>All sold out</h5>
+                        }
+                        else if (item.Quantity <= 50)
+                        {
+                            <h5>Low Stock</h5>
+                        }
+                    </td>
                     <td>@item.Price</td>
-                    <form method="get" action="/User/BuyOrder">
 
                     <td>
-                        <input type="number" name="Quantity" placeholder="Quantity" />
-                        <input type="hidden" name="Name" value="@item.Name" />
-                        <input type="hidden" name="price" value="@item.Price" />
-                        <input type="hidden" name="id" value="@item.Id" />
-                        <input type="hidden" name="category" value="@item.Category" />
-                    </td>
+                        <form asp-controller="Order" asp-action="Index">
+                            <input type="number" required name="amount" placeholder="Amount"
+                                min="1" max="@item.Quantity" />
+                            <input type="hidden" name="name" asp-for="@item.Name" />
+                            <input type="hidden" name="quantity" asp-for="@item.Quantity" />
+                            <input type="hidden" asp-for="@item.Price" step="0.01" name="price" />
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="hidden" name="category" value="@item.Category" />
+                            <input type="hidden" name="userId" value="@userId" />
                     <td>
                         <p>
                             <input type="submit" value="BUY" />
                         </p>
                     </td>
                     </form>
+                    </td>
                 }
             </tr>
         }
@@ -49,3 +77,4 @@
         </tr>
     }
 </table>
+

@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using MVC;
 using MVC.Infrastructure;
 using MVC.Interfaces;
-using MVC.Model;
 using MVC.Model.Enams;
 using MVC.ServicesUI;
 using MVC.ViewModels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddInfrastructure(connection);
 
 builder.Services.AddScoped<IProductsServisUI<ProductViewModel, Products>, ProductService>();
 builder.Services.AddScoped<IUsersServiseUI<UserViewModel, UserTypes>, UserService>();
+builder.Services.AddScoped<IOrderService<OrderViewModel>, OrderService>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program));

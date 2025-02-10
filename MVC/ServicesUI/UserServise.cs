@@ -18,29 +18,29 @@ namespace MVC.ServicesUI
             _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
         }
 
-        public IEnumerable<UserViewModel> GetAll(UserTypes user)
+        public async Task<IEnumerable<UserViewModel>> GetAllAsync(UserTypes user)
         {
            // var users = _userRepository.GetAll(user);
-            return _mapper.Map<List<UserViewModel>>(_userRepository.GetAll(user));
+            return _mapper.Map<List<UserViewModel>>(await _userRepository.GetAllAsync(user));
         }
-        public bool Add(UserViewModel data)
+        public async Task<bool> AddAsync(UserViewModel data)
         {
             var user = _mapper.Map<UserDto>(data);
-           return _userRepository.Add(user);
+           return await _userRepository.AddAsync(user);
         }
 
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            _userRepository.Delete(id);
+            await _userRepository.DeleteAsync(id);
         }
 
-        public UserViewModel GetById(Guid id)
+        public async Task<UserViewModel> GetByIdAsync(Guid id)
         {
-            var user = _userRepository.GetById(id);
+            var user = await _userRepository.GetByIdAsync(id);
             return _mapper.Map<UserViewModel>(user);
         }
 
-        public void Update(UserViewModel data)
+        public async Task UpdateAsync(UserViewModel data)
         {
             throw new NotImplementedException();
         }

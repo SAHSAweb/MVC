@@ -2,10 +2,10 @@
 {
     public interface IUsersServiseUI<T, K> where T : class
     {
-        T GetById(Guid id);
-        IEnumerable<T> GetAll(K data);
-        bool Add(T data);
-        void Delete(Guid id);
-        void Update(T data);
+        Task<T> GetByIdAsync(Guid id);
+        Task<IEnumerable<T>> GetAllAsync(K data);
+        Task<bool> AddAsync(T data);
+        Task DeleteAsync(Guid id);
+        Task UpdateAsync(T data);
     }
 }

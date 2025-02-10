@@ -11,7 +11,11 @@
     break;
 }
 <table class="table hidden-empty-cells">
-    <tr><th>Name Product</th><th>Quantity</th><th>Price</th></tr>
+    <tr>
+        <th>Name Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
     @if (Model != null && Model.Any())
     {
         @foreach (var item in Model)
@@ -19,8 +23,20 @@
             <tr>
                 @if (item.Name != null)
                 {
-                    <td>@item.Name</td>
-                    <td>@item.Quantity</td>
+                    <td><h3>@item.Name</h3></td>
+                    <td>@if (item.Quantity >= 50)
+                        {
+                            <h5>Available</h5>
+                        }
+                        else if (item.Quantity <= 0)
+                        {
+                            <h5>All sold out</h5>
+                        }
+                        else if (item.Quantity <= 50)
+                        {
+                            <h5>Low Stock</h5>
+                        }
+                    </td>
                     <td>@item.Price</td>
                     <form method="get" action="/Autorization/FormAuthorization">
 

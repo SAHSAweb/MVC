@@ -5,9 +5,9 @@ namespace MVC.BL.Interfaces
 {
     public interface IUserService<T> where T : class
     {
-        T GetById(Guid id);
-        IEnumerable<T> GetAll(UserTypes user);
-        bool Add(T user);
-        void Delete(Guid id);
+        Task<T> GetByIdAsync(Guid id);
+        Task<IEnumerable<T>> GetAllAsync(UserTypes user);
+        Task<bool> AddAsync(T user);
+        Task DeleteAsync(Guid id);
     }
 }

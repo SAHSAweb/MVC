@@ -8,6 +8,6 @@ namespace MVC.DAL.Entities
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public UserTypes UserType { get; set; }
-      //  public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; } = null!;      
     }
 }

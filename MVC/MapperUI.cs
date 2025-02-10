@@ -17,6 +17,9 @@ namespace MVC
             CreateMap<UserViewModel, UserDto>();
             CreateMap<UserDto, UserViewModel>();
 
+            CreateMap<OrderViewModel, OrderDto>();
+            CreateMap<OrderDto, OrderViewModel>();
+
         }
     }
 }

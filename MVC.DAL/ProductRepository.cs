@@ -1,11 +1,8 @@
-﻿using MVC.DAL.Entities;
-using MVC.DAL.Entities.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC.DAL.Entities;
+using MVC.DAL.Interfaces;
 using MVC.Model.Enams;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MVC.DAL
 {
@@ -19,19 +16,21 @@ namespace MVC.DAL
             _dbContext = context;
         }
 
-        public IEnumerable<Product> GetAll(Products category)
+        public async Task< IEnumerable<Product>> GetAllAsync(Products category)
         {
-            return _dbContext.Products.Where(p => p.Category == category);
+            return await _dbContext.Products.Where(p => p.Category == category).ToListAsync();
         }
-        public void Add(Product product)
+        public async Task AddAsync(Product product)
         {
-            _dbContext.Products.Add(product);
-            _dbContext.SaveChanges();
+            product.Name = product.Name;
+
+           await _dbContext.Products.AddAsync(product);
+           await _dbContext.SaveChangesAsync();
         }
 
-        public void Update(Product product)
+        public async Task UpdateAsync(Product product)
         {
-            var existingProduct = _dbContext.Products.FirstOrDefault(p => p.Id == product.Id);
+            var existingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
 
             if (existingProduct != null)
             {
@@ -39,30 +38,27 @@ namespace MVC.DAL
                 existingProduct.Price = product.Price;
                 existingProduct.Category = product.Category;
                 existingProduct.Quantity = product.Quantity;
-                _dbContext.SaveChanges();
+               await _dbContext.SaveChangesAsync();
             }
             else
             {
                 throw new KeyNotFoundException($"Product with ID {product.Id} was not found.");
             }
         }
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            var product = _dbContext.Products.FirstOrDefault(p => p.Id == id);
+            var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
 
             if (product != null)
             {
                 _dbContext.Products.Remove(product);
-                _dbContext.SaveChanges();
+               await _dbContext.SaveChangesAsync();
             }
         }
 
-        public Product GetById(Guid id)
+        public async Task<Product> GetByIdAsync(Guid id)
         {
-            return _dbContext.Products.FirstOrDefault(p => p.Id == id);
+            return await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
-
     }
-
-
 }

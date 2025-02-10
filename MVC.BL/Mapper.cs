@@ -19,6 +19,9 @@ namespace MVC.BL
 
             CreateMap<UserDto, User>();  
             CreateMap<User, UserDto>();
+
+            CreateMap<OrderDto, Order>();  
+            CreateMap<Order, OrderDto>();
             
         }
     }

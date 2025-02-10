@@ -4,7 +4,7 @@ using MVC.BL.Interfaces;
 using MVC.BL.Services;
 using MVC.DAL;
 using MVC.DAL.Entities;
-using MVC.DAL.Entities.Interfaces;
+using MVC.DAL.Interfaces;
 using MVC.Model;
 
 namespace MVC.Infrastructure
@@ -22,11 +22,14 @@ namespace MVC.Infrastructure
                 options.UseSqlServer(connection));
           
             services.AddScoped<IRepository<Product>, ProductRepository>();
-          
             services.AddScoped<IService<ProductDto>, ProductService>();
+
 
             services.AddScoped<IUserRepository<User>, UserRepository>();
             services.AddScoped<IUserService<UserDto>, UserService>();
+
+            services.AddScoped<IOrderServiceBL<OrderDto>, OrderService>();
+            services.AddScoped<IOrderRepository<Order>, OrderRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

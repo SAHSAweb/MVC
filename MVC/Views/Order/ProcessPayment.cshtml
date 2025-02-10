@@ -1,0 +1,17 @@
+﻿@{
+    var userId = ViewBag.UserId;
+    var totalPrice = ViewBag.TotalPrice;
+}
+
+
+<h1>ОПЛАТА ПРОШЛА УСПЕШНО</h1>
+<div class="message" style="color:red">
+    <p>
+        <h3>Вы потратили - @totalPrice</h3>
+    </p>
+
+</div>
+
+<a href="/User/User?id=@userId">
+    <input type="submit" value="BACK" autofocus style="padding: 10px 20px; border-radius: 7px; cursor: pointer;" />
+</a>

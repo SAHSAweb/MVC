@@ -1,11 +1,9 @@
-﻿
-
-using MVC.DAL.Entities.Interfaces;
-using MVC.DAL.Entities;
+﻿using MVC.DAL.Entities;
 using MVC.Model;
 using AutoMapper;
 using MVC.Model.Enams;
 using MVC.BL.Interfaces;
+using MVC.DAL.Interfaces;
 
 namespace MVC.BL.Services
 {
@@ -20,34 +18,39 @@ namespace MVC.BL.Services
             _mapper = mapper ;
         }
 
-        public IEnumerable<ProductDto> GetAll(Products category)
+        public async Task<IEnumerable<ProductDto>> GetAllAsync(Products category)
         {
-            var products = _productRepository.GetAll(category);
+            var products = await _productRepository.GetAllAsync(category);
             return _mapper.Map<List<ProductDto>>(products);
         }
 
-        public void Add(ProductDto data)
+        public async Task AddAsync(ProductDto data)
         {
             var product = _mapper.Map<Product>(data);
-            _productRepository.Add(product);
+           await _productRepository.AddAsync(product);
         }
 
-        public void Update(ProductDto data)
+        public async Task UpdateAsync(ProductDto data)
         {
             var product = _mapper.Map<Product>(data);
-            _productRepository.Update(product);
+           await _productRepository.UpdateAsync(product);
         }
 
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            _productRepository.Delete(id);
+           await _productRepository.DeleteAsync(id);
         }
 
-        public ProductDto GetById(Guid id)
+        public async Task<ProductDto> GetByIdAsync(Guid id)
         {
-            var product = _productRepository.GetById(id);
+            var product = await _productRepository.GetByIdAsync(id);
             return _mapper.Map<ProductDto>(product);
         }
-
+        public async Task UpdeteProductQuantityAsync(Guid productId, int amount)
+        {
+            var product = await _productRepository.GetByIdAsync(productId);
+            product.Quantity -= amount;
+           await _productRepository.UpdateAsync(product);
+        }
     }
 }

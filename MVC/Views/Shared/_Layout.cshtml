@@ -33,16 +33,13 @@
                             <a class="nav-link" href="/Autorization/FormAuthorization">Autorization</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Basket</a>
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                @RenderSection("HeaderContent", required: false)
+                            </ul>
                         </li>
                     </ul>
-                   
-                    @*<form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>*@
                 </div>
-            </div>
+            </div>          
         </nav>
     </header>
     @RenderBody()

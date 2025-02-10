@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
-
-using MVC.DAL.Entities.Interfaces;
 using MVC.DAL.Entities;
 using MVC.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MVC.Model.Enams;
 using MVC.BL.Interfaces;
+using MVC.DAL.Interfaces;
 
 namespace MVC.BL.Services
 {
@@ -24,26 +18,26 @@ namespace MVC.BL.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
         }
 
-        public bool Add(UserDto data)
+        public async Task<bool> AddAsync(UserDto data)
         {
             var user = _mapper.Map<User>(data);
-           return _userRepository.Add(user);
+           return await _userRepository.AddAsync(user);
         }
 
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            _userRepository.Delete(id);
+           await _userRepository.DeleteAsync(id);
         }
 
-        public IEnumerable<UserDto> GetAll(UserTypes user)
+        public async Task<IEnumerable<UserDto>> GetAllAsync(UserTypes user)
         {
-            var users = _userRepository.GetAll(user);
+            var users = await _userRepository.GetAllAsync(user);
             return _mapper.Map<List<UserDto>>(users);
         }
 
-        public UserDto GetById(Guid id)
+        public async Task<UserDto> GetByIdAsync(Guid id)
         {
-            var user = _userRepository.GetById(id);
+            var user = await _userRepository.GetByIdAsync(id);
             return _mapper.Map<UserDto>(user);
         }       
     }

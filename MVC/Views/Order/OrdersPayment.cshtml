@@ -1,0 +1,27 @@
+﻿@{
+    var userId = ViewBag.UserId;
+    var totalPrice = ViewBag.TotalPrice;
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+<body>
+    <h3 class="text-center mb-3">Payment Form</h3>
+    <form action="/order/processPayment?userId=@userId&totalPrice=@totalPrice" method="post">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="name" placeholder="Insert your Name" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="surname" placeholder="Insert your Surname" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="numberCard" maxlength="16" minlength="16" placeholder="Insert number of credit" required>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+            <input type="text" class="form-control me-2" name="cvv" maxlength="3" minlength="3" placeholder="CVV" required style="width: 45%;">
+            <input type="text" class="form-control" placeholder="Total:@totalPrice" readonly style="width: 50%;">
+        </div>        
+            <button type="submit" class="btn btn-success w-100">PAY</button>
+    </form>
+</body>

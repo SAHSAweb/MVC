@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MVC.DAL.Entities;
 using MVC.Interfaces;
 using MVC.Model.Enams;
 using MVC.ViewModels;
-using System.Security.Cryptography;
+
 
 namespace MVC.Controllers
 {
@@ -17,16 +15,18 @@ namespace MVC.Controllers
             _productService = productService;
         }
         [HttpGet]
-        public IActionResult ProductsIndex(Products category)
-        {
- 
-            var result = _productService.GetAll(category).ToList();
+        public async Task<IActionResult> ProductsIndexAsync(Products category,Guid userId)
+        { 
+            var result = await _productService.GetAllAsync(category);
+
+            ViewBag.UserId = userId; 
+
             return View(result);
         }
-        public IActionResult ProductsOverview(Products category)
+        public async Task<IActionResult> ProductsOverviewAsync(Products category)
         {
 
-            var result = _productService.GetAll(category).ToList();
+            var result = await _productService.GetAllAsync(category);
             return View(result);
         }
     }

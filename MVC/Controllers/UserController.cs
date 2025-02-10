@@ -4,9 +4,9 @@ namespace MVC.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult User()
+        public IActionResult User(Guid id)
         {
-            return View();
+            return View(id);
         } 
         public IActionResult Admin()
         {
